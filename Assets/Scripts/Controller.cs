@@ -40,6 +40,9 @@ public class Controller : MonoBehaviour
 
     public List<BlockMini> listcansapxeplai;
 
+    private List<BlockMini> fillTempListBlockMini = new List<BlockMini>();
+    public Cubifier cubifierMain;
+
     [Button()]    
     
     public void FilterObject()
@@ -70,6 +73,321 @@ public class Controller : MonoBehaviour
     }
 
     // chuc nang doi xung
+     //đối xứng trục y qua ox (la thay doi z);
+    [Button()]
+    public void FillPrintArrayOy()
+    {
+        fillTempListBlockMini.Clear();
+        Debug.Log("dang tien hanh");
+        foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
+        {
+           
+            string keyValue = pair.Key;
+            //Debug.Log(keyValue);
+            string[] numbersAsStrings = keyValue.Split('|');
+         
+            float[] numbersAsFloats = new float[numbersAsStrings.Length];
+       
+            for (int i = 0; i < numbersAsStrings.Length; i++)
+            {
+                numbersAsFloats[i] = float.Parse(numbersAsStrings[i]);
+              
+            }
+            string keyValueOpposite = numbersAsFloats[0] + "|" + numbersAsFloats[1] + "|" + -1 * numbersAsFloats[2];
+          
+            if (blockMiniDictionary.ContainsKey(keyValueOpposite))
+            {
+            }
+            else
+            {
+
+                    BlockMini blockMiniDic = pair.Value;
+                    Vector3 positionBlock =blockMiniDic.transform.position;
+                    GameObject SubCube = Instantiate(cubifierMain.PrefabCubeMini);                   
+                    SubCube.transform.localScale = cubifierMain.SectionSize;
+                    SubCube.transform.position = new Vector3(positionBlock.x, positionBlock.y, positionBlock.z * -1);
+                  
+                    SubCube.transform.SetParent(cubifierMain.ParentTransform);
+                    BlockMini blockMini = SubCube.GetComponent<BlockMini>();
+                    Controller.Instance.blockMiniList.Add(blockMini);
+
+
+                   fillTempListBlockMini.Add(blockMini);
+
+            }
+        }
+
+        for(int i=0 ; i< fillTempListBlockMini.Count;i++){
+            int xx = (int)(fillTempListBlockMini[i].transform.position.x * 10000);
+            int yy = (int)(fillTempListBlockMini[i].transform.position.y * 10000);
+            int zz = (int)(fillTempListBlockMini[i].transform.position.z * 10000);
+            string key = xx + "|" + yy + "|" + zz;
+            blockMiniDictionary.Add(key, fillTempListBlockMini[i]);
+        }
+    }
+
+       // chuc nang doi xung
+     //đối xứng trục y qua oz (la thay doi x);
+    [Button()]
+    public void FillPrintArrayOy2()
+    {
+        fillTempListBlockMini.Clear();
+        Debug.Log("dang tien hanh");
+        foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
+        {
+           
+            string keyValue = pair.Key;
+            //Debug.Log(keyValue);
+            string[] numbersAsStrings = keyValue.Split('|');
+         
+            float[] numbersAsFloats = new float[numbersAsStrings.Length];
+       
+            for (int i = 0; i < numbersAsStrings.Length; i++)
+            {
+                numbersAsFloats[i] = float.Parse(numbersAsStrings[i]);
+              
+            }
+            string keyValueOpposite =-1 * numbersAsFloats[0] + "|" + numbersAsFloats[1] + "|" + numbersAsFloats[2];
+          
+            if (blockMiniDictionary.ContainsKey(keyValueOpposite))
+            {
+            }
+            else
+            {
+
+                    BlockMini blockMiniDic = pair.Value;
+                    Vector3 positionBlock =blockMiniDic.transform.position;
+                    GameObject SubCube = Instantiate(cubifierMain.PrefabCubeMini);                   
+                    SubCube.transform.localScale = cubifierMain.SectionSize;
+                    SubCube.transform.position = new Vector3(-1 * positionBlock.x, positionBlock.y, positionBlock.z);
+                  
+                    SubCube.transform.SetParent(cubifierMain.ParentTransform);
+                    BlockMini blockMini = SubCube.GetComponent<BlockMini>();
+                    Controller.Instance.blockMiniList.Add(blockMini);
+
+
+                   fillTempListBlockMini.Add(blockMini);
+
+            }
+        }
+
+        for(int i=0 ; i< fillTempListBlockMini.Count;i++){
+            int xx = (int)(fillTempListBlockMini[i].transform.position.x * 10000);
+            int yy = (int)(fillTempListBlockMini[i].transform.position.y * 10000);
+            int zz = (int)(fillTempListBlockMini[i].transform.position.z * 10000);
+            string key = xx + "|" + yy + "|" + zz;
+            blockMiniDictionary.Add(key, fillTempListBlockMini[i]);
+        }
+    }
+
+     //đối xứng trục x qua oz (la thay doi y);
+    [Button()]
+    public void FillPrintArrayOx()
+    {
+        fillTempListBlockMini.Clear();
+        Debug.Log("dang tien hanh");
+        foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
+        {
+           
+            string keyValue = pair.Key;
+            //Debug.Log(keyValue);
+            string[] numbersAsStrings = keyValue.Split('|');
+         
+            float[] numbersAsFloats = new float[numbersAsStrings.Length];
+       
+            for (int i = 0; i < numbersAsStrings.Length; i++)
+            {
+                numbersAsFloats[i] = float.Parse(numbersAsStrings[i]);
+              
+            }
+            string keyValueOpposite = numbersAsFloats[0] + "|" + -1 *numbersAsFloats[1] + "|" +  numbersAsFloats[2];
+          
+            if (blockMiniDictionary.ContainsKey(keyValueOpposite))
+            {
+            }
+            else
+            {
+
+                    BlockMini blockMiniDic = pair.Value;
+                    Vector3 positionBlock =blockMiniDic.transform.position;
+                    GameObject SubCube = Instantiate(cubifierMain.PrefabCubeMini);                   
+                    SubCube.transform.localScale = cubifierMain.SectionSize;
+                    SubCube.transform.position = new Vector3(positionBlock.x,-1* positionBlock.y, positionBlock.z );
+                  
+                    SubCube.transform.SetParent(cubifierMain.ParentTransform);
+                    BlockMini blockMini = SubCube.GetComponent<BlockMini>();
+                    Controller.Instance.blockMiniList.Add(blockMini);
+
+
+                   fillTempListBlockMini.Add(blockMini);
+
+            }
+        }
+
+        for(int i=0 ; i< fillTempListBlockMini.Count;i++){
+            int xx = (int)(fillTempListBlockMini[i].transform.position.x * 10000);
+            int yy = (int)(fillTempListBlockMini[i].transform.position.y * 10000);
+            int zz = (int)(fillTempListBlockMini[i].transform.position.z * 10000);
+            string key = xx + "|" + yy + "|" + zz;
+            blockMiniDictionary.Add(key, fillTempListBlockMini[i]);
+        }
+    }
+     //đối xứng trục x qua oy (la thay doi z);
+        [Button()]
+    public void FillPrintArrayOx2()
+    {
+        fillTempListBlockMini.Clear();
+        Debug.Log("dang tien hanh");
+        foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
+        {
+           
+            string keyValue = pair.Key;
+            //Debug.Log(keyValue);
+            string[] numbersAsStrings = keyValue.Split('|');
+         
+            float[] numbersAsFloats = new float[numbersAsStrings.Length];
+       
+            for (int i = 0; i < numbersAsStrings.Length; i++)
+            {
+                numbersAsFloats[i] = float.Parse(numbersAsStrings[i]);
+              
+            }
+            string keyValueOpposite = numbersAsFloats[0] + "|" + numbersAsFloats[1] + "|" + -1 * numbersAsFloats[2];
+          
+            if (blockMiniDictionary.ContainsKey(keyValueOpposite))
+            {
+            }
+            else
+            {
+
+                    BlockMini blockMiniDic = pair.Value;
+                    Vector3 positionBlock =blockMiniDic.transform.position;
+                    GameObject SubCube = Instantiate(cubifierMain.PrefabCubeMini);                   
+                    SubCube.transform.localScale = cubifierMain.SectionSize;
+                    SubCube.transform.position = new Vector3(positionBlock.x, positionBlock.y,-1* positionBlock.z );
+                  
+                    SubCube.transform.SetParent(cubifierMain.ParentTransform);
+                    BlockMini blockMini = SubCube.GetComponent<BlockMini>();
+                    Controller.Instance.blockMiniList.Add(blockMini);
+
+
+                   fillTempListBlockMini.Add(blockMini);
+
+            }
+        }
+
+        for(int i=0 ; i< fillTempListBlockMini.Count;i++){
+            int xx = (int)(fillTempListBlockMini[i].transform.position.x * 10000);
+            int yy = (int)(fillTempListBlockMini[i].transform.position.y * 10000);
+            int zz = (int)(fillTempListBlockMini[i].transform.position.z * 10000);
+            string key = xx + "|" + yy + "|" + zz;
+            blockMiniDictionary.Add(key, fillTempListBlockMini[i]);
+        }
+    }
+ //đối xứng trục z qua ox (la thay doi y);
+        [Button()]
+    public void FillPrintArrayOz()
+    {
+        fillTempListBlockMini.Clear();
+        Debug.Log("dang tien hanh");
+        foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
+        {
+           
+            string keyValue = pair.Key;
+            //Debug.Log(keyValue);
+            string[] numbersAsStrings = keyValue.Split('|');
+         
+            float[] numbersAsFloats = new float[numbersAsStrings.Length];
+       
+            for (int i = 0; i < numbersAsStrings.Length; i++)
+            {
+                numbersAsFloats[i] = float.Parse(numbersAsStrings[i]);
+              
+            }
+            string keyValueOpposite = numbersAsFloats[0] + "|" + -1 *numbersAsFloats[1] + "|" +  numbersAsFloats[2];
+          
+            if (blockMiniDictionary.ContainsKey(keyValueOpposite))
+            {
+            }
+            else
+            {
+
+                    BlockMini blockMiniDic = pair.Value;
+                    Vector3 positionBlock =blockMiniDic.transform.position;
+                    GameObject SubCube = Instantiate(cubifierMain.PrefabCubeMini);                   
+                    SubCube.transform.localScale = cubifierMain.SectionSize;
+                    SubCube.transform.position = new Vector3(positionBlock.x,-1 * positionBlock.y, positionBlock.z );
+                  
+                    SubCube.transform.SetParent(cubifierMain.ParentTransform);
+                    BlockMini blockMini = SubCube.GetComponent<BlockMini>();
+                    Controller.Instance.blockMiniList.Add(blockMini);
+
+
+                   fillTempListBlockMini.Add(blockMini);
+
+            }
+        }
+
+        for(int i=0 ; i< fillTempListBlockMini.Count;i++){
+            int xx = (int)(fillTempListBlockMini[i].transform.position.x * 10000);
+            int yy = (int)(fillTempListBlockMini[i].transform.position.y * 10000);
+            int zz = (int)(fillTempListBlockMini[i].transform.position.z * 10000);
+            string key = xx + "|" + yy + "|" + zz;
+            blockMiniDictionary.Add(key, fillTempListBlockMini[i]);
+        }
+    }
+     //đối xứng trục z qua oy (la thay doi x);
+           [Button()]
+    public void FillPrintArrayOz2()
+    {
+        fillTempListBlockMini.Clear();
+        Debug.Log("dang tien hanh");
+        foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
+        {
+           
+            string keyValue = pair.Key;
+            //Debug.Log(keyValue);
+            string[] numbersAsStrings = keyValue.Split('|');
+         
+            float[] numbersAsFloats = new float[numbersAsStrings.Length];
+       
+            for (int i = 0; i < numbersAsStrings.Length; i++)
+            {
+                numbersAsFloats[i] = float.Parse(numbersAsStrings[i]);
+              
+            }
+            string keyValueOpposite = -1 * numbersAsFloats[0] + "|" + numbersAsFloats[1] + "|" +  numbersAsFloats[2];
+          
+            if (blockMiniDictionary.ContainsKey(keyValueOpposite))
+            {
+            }
+            else
+            {
+
+                    BlockMini blockMiniDic = pair.Value;
+                    Vector3 positionBlock =blockMiniDic.transform.position;
+                    GameObject SubCube = Instantiate(cubifierMain.PrefabCubeMini);                   
+                    SubCube.transform.localScale = cubifierMain.SectionSize;
+                    SubCube.transform.position = new Vector3(-1 * positionBlock.x, positionBlock.y, positionBlock.z );
+                  
+                    SubCube.transform.SetParent(cubifierMain.ParentTransform);
+                    BlockMini blockMini = SubCube.GetComponent<BlockMini>();
+                    Controller.Instance.blockMiniList.Add(blockMini);
+
+
+                   fillTempListBlockMini.Add(blockMini);
+
+            }
+        }
+
+        for(int i=0 ; i< fillTempListBlockMini.Count;i++){
+            int xx = (int)(fillTempListBlockMini[i].transform.position.x * 10000);
+            int yy = (int)(fillTempListBlockMini[i].transform.position.y * 10000);
+            int zz = (int)(fillTempListBlockMini[i].transform.position.z * 10000);
+            string key = xx + "|" + yy + "|" + zz;
+            blockMiniDictionary.Add(key, fillTempListBlockMini[i]);
+        }
+    }
 
     //đối xứng trục y qua ox (la thay doi z);
     [Button()]
@@ -133,6 +451,135 @@ public class Controller : MonoBehaviour
             }
         }
     }
+    //đối xứng trục x qua oz (la thay doi y);
+    [Button()]
+    public void PrintArrayOx()
+    {
+        Debug.Log("dang tien hanh");
+        foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
+        {
+           
+            string keyValue = pair.Key;
+            //Debug.Log(keyValue);
+            string[] numbersAsStrings = keyValue.Split('|');
+         
+            float[] numbersAsFloats = new float[numbersAsStrings.Length];
+       
+            for (int i = 0; i < numbersAsStrings.Length; i++)
+            {
+                numbersAsFloats[i] = float.Parse(numbersAsStrings[i]);
+              
+            }
+            string keyValueOpposite = numbersAsFloats[0] + "|" +-1 * numbersAsFloats[1] + "|" + numbersAsFloats[2];
+            if (blockMiniDictionary.ContainsKey(keyValueOpposite))
+            {
+            }
+            else
+            {
+                BlockMini blockMini = pair.Value;
+                blockMini.gameObject.SetActive(false);
+                blockMiniList.Remove(pair.Value);
+            }
+        }
+    }
+
+     //đối xứng trục x qua oy (la thay doi z);
+    [Button()]
+    public void PrintArrayOx2()
+    {
+        Debug.Log("dang tien hanh");
+        foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
+        {
+           
+            string keyValue = pair.Key;
+            //Debug.Log(keyValue);
+            string[] numbersAsStrings = keyValue.Split('|');
+         
+            float[] numbersAsFloats = new float[numbersAsStrings.Length];
+       
+            for (int i = 0; i < numbersAsStrings.Length; i++)
+            {
+                numbersAsFloats[i] = float.Parse(numbersAsStrings[i]);
+              
+            }
+            string keyValueOpposite = numbersAsFloats[0] + "|" + numbersAsFloats[1] + "|" +-1* numbersAsFloats[2];
+            if (blockMiniDictionary.ContainsKey(keyValueOpposite))
+            {
+            }
+            else
+            {
+                BlockMini blockMini = pair.Value;
+                blockMini.gameObject.SetActive(false);
+                blockMiniList.Remove(pair.Value);
+            }
+        }
+    }
+
+    //đối xứng trục z qua ox (la thay doi y);
+    [Button()]
+    public void PrintArrayOz()
+    {
+        Debug.Log("dang tien hanh");
+        foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
+        {
+           
+            string keyValue = pair.Key;
+            //Debug.Log(keyValue);
+            string[] numbersAsStrings = keyValue.Split('|');
+         
+            float[] numbersAsFloats = new float[numbersAsStrings.Length];
+       
+            for (int i = 0; i < numbersAsStrings.Length; i++)
+            {
+                numbersAsFloats[i] = float.Parse(numbersAsStrings[i]);
+              
+            }
+            string keyValueOpposite = numbersAsFloats[0] + "|" +-1 * numbersAsFloats[1] + "|" + numbersAsFloats[2];
+            if (blockMiniDictionary.ContainsKey(keyValueOpposite))
+            {
+            }
+            else
+            {
+                BlockMini blockMini = pair.Value;
+                blockMini.gameObject.SetActive(false);
+                blockMiniList.Remove(pair.Value);
+            }
+        }
+    }
+
+
+     //đối xứng trục z qua oy (la thay doi x);
+    [Button()]
+    public void PrintArrayOz2()
+    {
+        Debug.Log("dang tien hanh");
+        foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
+        {
+           
+            string keyValue = pair.Key;
+            //Debug.Log(keyValue);
+            string[] numbersAsStrings = keyValue.Split('|');
+         
+            float[] numbersAsFloats = new float[numbersAsStrings.Length];
+       
+            for (int i = 0; i < numbersAsStrings.Length; i++)
+            {
+                numbersAsFloats[i] = float.Parse(numbersAsStrings[i]);
+              
+            }
+            string keyValueOpposite = -1 * numbersAsFloats[0] + "|" +  numbersAsFloats[1] + "|" + numbersAsFloats[2];
+            if (blockMiniDictionary.ContainsKey(keyValueOpposite))
+            {
+            }
+            else
+            {
+                BlockMini blockMini = pair.Value;
+                blockMini.gameObject.SetActive(false);
+                blockMiniList.Remove(pair.Value);
+            }
+        }
+    }
+
 
     [Button()]
 

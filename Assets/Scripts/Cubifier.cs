@@ -10,15 +10,15 @@ public class Cubifier : MonoBehaviour
     public GameObject PrefabCubeMini;
 
     public GameObject TargetCube;
-    private GameObject TargetCube2;
+    public GameObject TargetCube2;
 
     public Vector3 SectionCount;
 //    public Material SubCubeMaterial;
 
     private Vector3 SizeOfOriginalCube;
-    private Vector3 SectionSize;
+    public Vector3 SectionSize;
     private Vector3 FillStartPosition;
-    private Transform ParentTransform;
+    public Transform ParentTransform;
     private GameObject SubCube;
 
     private MeshRenderer vfxRenderer;
