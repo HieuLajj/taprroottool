@@ -416,6 +416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 341286861}
   - component: {fileID: 341286860}
+  - component: {fileID: 341286862}
   m_Layer: 0
   m_Name: code
   m_TagString: Untagged
@@ -439,7 +440,7 @@ MonoBehaviour:
   PrefabCubeMini: {fileID: 1014838370215773184, guid: a15d98c5dbc69c843a727ee2afa564df, type: 3}
   TargetCube: {fileID: 1543578494}
   TargetCube2: {fileID: 0}
-  SectionCount: {x: 10, y: 10, z: 10}
+  SectionCount: {x: 5, y: 5, z: 5}
   SectionSize: {x: 0, y: 0, z: 0}
   ParentTransform: {fileID: 0}
 --- !u!4 &341286861
@@ -457,6 +458,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &341286862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341286859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d70b6726d6a11144950b471dbd7fec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomSpeed: 0
+  zoomSpeed2: 0
 --- !u!1 &423703010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 09b03f2aeb3adda49a362d27bbb2b41b, type: 3}
@@ -748,6 +763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b90cd0b90f8ece479645839ba0fd1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bdir: 0
+  increaseReduce: {fileID: 341286862}
   blockDoidien: {fileID: 1014838370215773184, guid: 5e01409de224dcb4a8a8f84a5922e5b7, type: 3}
   pretransform: {fileID: 0}
   blockMiniList: []
@@ -1522,10 +1539,10 @@ RectTransform:
   m_Father: {fileID: 1606822776}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 243.5, y: -136.5}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -43, y: 40.8}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2022974802
 MonoBehaviour:

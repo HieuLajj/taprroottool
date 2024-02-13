@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
-
+using Sirenix.OdinInspector;
 
 public enum DirectionBlock
 {
@@ -22,6 +22,8 @@ public enum StatusBlock
 
 public class BlockMini : MonoBehaviour
 {
+    public float AngleBlock;
+    public Vector3 positionFirst;
     public StatusBlock statusBlock = StatusBlock.Normal;
 
 
@@ -254,5 +256,42 @@ public class BlockMini : MonoBehaviour
         } while (randomNumber == a); // Lặp lại nếu số ngẫu nhiên bằng 2
 
         GetDirectionBlock(randomNumber);
+    }
+    public Vector3 positioncongthem;
+    
+    public void Tangkhoangcach(float a){
+        Vector3 direction = (transform.position).normalized;
+        float b = a/AngleBlock+ Vector3.Distance(transform.position,transform.parent.position);
+       // Debug.Log(a/AngleBlock+"====================="+ Vector3.Distance(transform.position,transform.parent.position));
+        ///AngleBlock;
+        
+      //.  if( Vector3.Distance(newPosition, Controller.Instance.cubifierMain.ParentTransform.transform.position)< Vector3.Distance(positionFirst, Controller.Instance.cubifierMain.ParentTransform.transform.position))return;
+       
+        //transform.position =  transform.position + (direction * a)/AngleBlock;
+        Vector3 aa= transform.position- transform.parent.position;
+       
+               transform.position =  transform.position + (direction * b)*0.01f;
+        
+     
+    }
+    [Button]
+    public void REsetPosition(){
+        positioncongthem = Vector3.zero;
+      
+      //  transform.position = positionFirst;
+         transform.localPosition = positionFirst;
+    }
+
+    public void DefineAngleBlock(){
+        Vector3 dirPosition = transform.position;
+        Vector3 dir2 = new Vector3(dirPosition.x,0,dirPosition.z);
+        Vector3 planeNormal = new Vector3(0, 0, 1);
+        
+        AngleBlock = Vector3.Angle(dirPosition, dir2);
+        AngleBlock = Mathf.Round(AngleBlock); // Làm tròn số
+        if(AngleBlock>=90){
+            AngleBlock-=90;
+        }
+        AngleBlock = Mathf.Cos(Mathf.Deg2Rad * AngleBlock);
     }
 }

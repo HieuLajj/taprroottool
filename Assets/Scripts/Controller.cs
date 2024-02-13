@@ -8,6 +8,8 @@ using System;
 
 public class Controller : MonoBehaviour
 {
+    public int bdir=0;
+    public InCreaseReduce increaseReduce;
     public GameObject blockDoidien;
     private static Controller instance;
     public static Controller Instance
@@ -131,6 +133,7 @@ public class Controller : MonoBehaviour
     [Button()]
     public void FillPrintArrayOy2()
     {
+
         fillTempListBlockMini.Clear();
         Debug.Log("dang tien hanh");
         foreach (KeyValuePair<string, BlockMini> pair in blockMiniDictionary)
@@ -644,6 +647,19 @@ public class Controller : MonoBehaviour
         foreach (var item in blockMiniList)
         {
             item.checkRay2();
+        }
+
+    }
+
+    [Button]
+    public void REsetVitri()
+    {
+        increaseReduce.zoomSpeed = 0;
+        increaseReduce.zoomSpeed2 = 0;
+
+        foreach (var item in blockMiniList)
+        {
+            item.REsetPosition();
         }
 
     }

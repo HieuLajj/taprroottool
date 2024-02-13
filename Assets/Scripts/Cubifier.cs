@@ -68,11 +68,12 @@ public class Cubifier : MonoBehaviour
                     SubCube.transform.localScale = SectionSize;
                     SubCube.transform.position = FillStartPosition + TargetCube2.transform.TransformDirection(new Vector3((SectionSize.x) * i, -(SectionSize.y) * j, (SectionSize.z) * k));
                     SubCube.transform.rotation = TargetCube2.transform.rotation;
-
+                    
                     SubCube.transform.SetParent(ParentTransform);
                     BlockMini blockMini = SubCube.GetComponent<BlockMini>();
+                    blockMini.positionFirst = SubCube.transform.position;
                     Controller.Instance.blockMiniList.Add(blockMini);
-
+                    blockMini.DefineAngleBlock();
                 }
             }
         }
